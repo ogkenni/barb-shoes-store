@@ -1,0 +1,25 @@
+.card {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+.image {
+  height: 200px;
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 576px) {
+  .card {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    max-width: 412px;
+    row-gap: 10px;
+  }
+  .image {
+    height: 175px;
+    width: 175px;
+    margin-bottom: 5px;
+  }
+}

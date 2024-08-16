@@ -1,0 +1,125 @@
+.small {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.1666666716337204px;
+  text-align: left;
+  color: #ff6f5b;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.31rem;
+  position: relative;
+  bottom: 36px;
+  right: -115px;
+}
+
+label[for='email'] {
+  position: relative;
+  margin: 10px 0 0;
+}
+
+label[for='email'] img {
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
+.navButton {
+  background-color: blueviolet;
+  border: none;
+  width: 100px;
+  height: 50px;
+  color: #fff;
+  border-radius: 15px;
+}
+
+.container {
+  margin: 5vw 10vw;
+  font-size: 20px;
+  text-align: center;
+}
+.contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+  height: auto;
+  max-width: 768px;
+  gap: 10px;
+  margin: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+form {
+  width: 445px;
+  margin: 0;
+  padding: 10px 0 0;
+}
+.contact input {
+  width: 400px;
+  height: 40px;
+  padding: 10px;
+  text-transform: uppercase;
+  border: transparent;
+}
+
+.contact textarea {
+  width: 400px;
+  height: 200px;
+  padding: 10px;
+  text-transform: uppercase;
+  border: transparent;
+}
+
+@media only screen and (max-width: 567px) {
+  .container {
+    max-width: 412px;
+    text-align: start;
+    margin: 20px 0;
+    padding: 30px 0;
+  }
+  .contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: auto;
+    max-width: 412px;
+    gap: 10px;
+    padding: 20px 0 0;
+  }
+  .contact input {
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+  }
+  .contact textarea {
+    width: 370px;
+    height: 150px;
+    padding: 10px;
+  }
+  form {
+    max-width: 375px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  small {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    left: 66px;
+  }
+  label[for='email'] {
+    padding: 10px 0 0;
+  }
+
+  label[for='email'] img {
+    position: absolute;
+    top: 20px;
+    right: 0;
+  }
+  label[for='message'] {
+    padding: 20px 0;
+  }
+}

@@ -1,0 +1,8 @@
+.heroButton {
+  background-color: blueviolet;
+  border: none;
+  width: 100px;
+  height: 50px;
+  color: #fff;
+  border-radius: 15px;
+}
