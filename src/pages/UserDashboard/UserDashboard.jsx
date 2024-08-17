@@ -93,7 +93,7 @@ const UserDashboard = () => {
       <Header />
       <div className="container my-5">
         <h1 className="pb-5">Hello, welcome!</h1>
-        <h2 className="d-flex justify-content-start fs-1">Available Items</h2>
+        <h2 className="d-flex justify-content-start fs-1 mb-5">Available Items</h2>
         <div>
            <ul className={styles.heading}>
             {products.map((item) => (
