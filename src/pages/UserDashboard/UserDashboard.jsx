@@ -29,13 +29,21 @@ const UserDashboard = () => {
     }
   };
 
-  const fetchCart = async () => {
+const fetchCart = async () => {
+  const userId = sessionStorage.getItem('userId');
+  const token = sessionStorage.getItem('token'); // Ensure token is available
+
+  if (!userId || !token) {
+    console.error('User ID or token is not defined');
+    return;
+  }
+
   try {
     const response = await axios.get(
       `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
       {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`, // Add 'Bearer ' prefix if required
         },
       }
     );
@@ -46,6 +54,7 @@ const UserDashboard = () => {
   }
 };
 
+
   fetchProducts();
   fetchCart();
 }, [userId, token]);
@@ -53,8 +62,10 @@ const UserDashboard = () => {
 
 const handleAddToCart = async (product) => {
   const userId = sessionStorage.getItem('userId');
-  if (!userId) {
-    console.error('User ID is not defined');
+  const token = sessionStorage.getItem('token'); // Ensure token is available
+
+  if (!userId || !token) {
+    console.error('User ID or token is not defined');
     return;
   }
 
@@ -67,7 +78,7 @@ const handleAddToCart = async (product) => {
       },
       {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`, // Add 'Bearer ' prefix if required
         },
       }
     );
@@ -90,7 +101,7 @@ const handleAddToCart = async (product) => {
     });
     setCartItemsCount((prevCount) => prevCount + 1);
   } catch (error) {
-    console.error('Error adding product to cart:', error);
+    console.error('Error adding product to cart:', error.response ? error.response.data : error.message);
   }
 };
 
