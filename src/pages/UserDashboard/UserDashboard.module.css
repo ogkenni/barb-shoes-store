@@ -4,7 +4,7 @@
   margin-bottom: 10px;
   }
 .heading {
- list-style: none;
+  list-style-type: none;
      display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 30px;
