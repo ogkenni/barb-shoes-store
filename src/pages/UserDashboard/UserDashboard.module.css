@@ -1,5 +1,5 @@
 
-ul {
+.heading {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -9,7 +9,7 @@ ul {
 }
 
 @media (max-width: 576px) {
-  ul {
+  .heading {
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: auto;
