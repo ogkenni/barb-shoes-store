@@ -8,15 +8,15 @@ const Products = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
+useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          'https://silver-gray-stem.glitch.me/api/products'
+          'https://silver-gray-stem.glitch.me/api/homepage-products'
         );
         setProducts(response.data);
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Error fetching homepage products:', error.message);
         setError('Failed to load products. Please try again later.');
       }
     };
