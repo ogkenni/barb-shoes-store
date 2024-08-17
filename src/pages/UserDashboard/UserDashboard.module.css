@@ -1,8 +1,8 @@
  .image{
-      height: 200px,
-       width: 200px,
-       margin-bottom: 10px,
-        }
+   height: 200px,
+   width: 200px,
+  margin-bottom: 10px,
+  }
 .heading {
   display: flex;
   flex-direction: row;
