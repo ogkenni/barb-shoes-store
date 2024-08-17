@@ -95,7 +95,7 @@ const UserDashboard = () => {
         <h1 className="pb-5">Hello, welcome!</h1>
         <h2 className="d-flex justify-content-start fs-1">Available Items</h2>
         <div>
-           <ul style={{ listStyle: 'none' }} className="my-5">
+           <ul className="my-5">
             {products.map((item) => (
               <li key={item.id}>
                 <img
