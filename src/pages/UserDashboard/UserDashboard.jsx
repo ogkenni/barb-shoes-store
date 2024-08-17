@@ -95,13 +95,31 @@ const UserDashboard = () => {
         <h1 className="pb-5">Hello, welcome!</h1>
         <h2 className="d-flex justify-content-start fs-1">Available Items</h2>
         <div>
-          <ul className="my-5">
+           <ul style={{ listStyle: 'none' }} className="my-5">
             {products.map((item) => (
               <li key={item.id}>
-                <img src={item.image_url} alt={item.name} />
+                <img
+                  style={{
+                    height: '200px',
+                    width: '200px',
+                    marginBottom: '10px',
+                  }}
+                  src={item.image_url}
+                  alt={item.name}
+                />
                 <p>{item.name}</p>
                 <p>N{item.price}</p>
-                <button onClick={() => handleAddToCart(item)}>
+                <button
+                  style={{
+                    backgroundColor: 'blueviolet',
+                    border: 'none',
+                    width: '100px',
+                    height: '50px',
+                    color: '#fff',
+                    borderRadius: '15px',
+                  }}
+                  onClick={() => handleAddToCart(item)}
+                >
                   Add to Cart
                 </button>
               </li>
