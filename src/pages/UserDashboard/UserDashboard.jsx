@@ -82,29 +82,34 @@ const handleAddToCart = async (product) => {
         },
       }
     );
-    console.log(response);
+    
+    // Check if the response indicates success
+    if (response.data.success) {
+      console.log('Item added to cart successfully');
 
-    // Update local state
-    setCart((prevCart) => {
-      const existingProduct = prevCart.find(
-        (item) => item.id === product.id
-      );
-      if (existingProduct) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+      // Update local state
+      setCart((prevCart) => {
+        const existingProduct = prevCart.find(
+          (item) => item.id === product.id
         );
-      } else {
-        return [...prevCart, { ...product, quantity: 1 }];
-      }
-    });
-    setCartItemsCount((prevCount) => prevCount + 1);
+        if (existingProduct) {
+          return prevCart.map((item) =>
+            item.id === product.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          );
+        } else {
+          return [...prevCart, { ...product, quantity: 1 }];
+        }
+      });
+      setCartItemsCount((prevCount) => prevCount + 1);
+    } else {
+      console.error('Failed to add item to cart');
+    }
   } catch (error) {
     console.error('Error adding product to cart:', error.response ? error.response.data : error.message);
   }
 };
-
 
 
   const handleCheckout = () => {
