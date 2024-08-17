@@ -15,14 +15,20 @@ const UserDashboard = () => {
  useEffect(() => {
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(
-        'https://silver-gray-stem.glitch.me/api/products',
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
+      const response = await axios.post(
+  `https://silver-gray-stem.glitch.me/api/cart/${userId}/add-item`,
+  {
+    productId: product.id,
+    quantity: 1,
+  },
+  {
+    headers: {
+      Authorization: token,
+    },
+  }
+);
+console.log(response);
+
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
