@@ -5,8 +5,10 @@
   }
 .heading {
   list-style-type: none;
-     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
+ max-width: 100%;
   gap: 30px;
   height: auto;
 }
@@ -14,12 +16,12 @@
 @media (max-width: 576px) {
   .heading {
     display: grid;
-    grid-template-columns: repeat (6, 1fr);
+    grid-template-columns: 1fr 1fr;
     height: auto;
     max-width: 412px;
   }
-  .image{ height: 140px;
-    width: 140px;
+  .image{ height: 145px;
+    width: 145px;
     margin-bottom: 10px;
    }
 }
