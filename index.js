@@ -212,6 +212,23 @@ app.delete('/api/admin/delete-product/:id', async (req, res) => {
   }
 });
 
+app.get('/api/homepage-products', async (req, res) => {
+  try {
+    // Query the database to fetch all products
+    const result = await db.query(
+      'SELECT * FROM products WHERE is_hidden = false'
+    );
+    // Send the result back as JSON
+    res.json(result.rows);
+  } catch (error) {
+    // Log the error and send a response with a status of 500
+    console.error('Error fetching products:', error.message);
+    res
+      .status(500)
+      .json({ message: 'Internal server error', error: error.message });
+  }
+});
+
 // Displays all products from the database on the frontend
 app.get('/api/products', verifyToken, async (req, res) => {
   try {
