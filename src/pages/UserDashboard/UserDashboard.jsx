@@ -62,7 +62,7 @@ const fetchCart = async () => {
 
 const handleAddToCart = async (product) => {
   const userId = sessionStorage.getItem('userId');
-  const token = sessionStorage.getItem('token'); // Ensure token is available
+  const token = sessionStorage.getItem('token');
 
   if (!userId || !token) {
     console.error('User ID or token is not defined');
@@ -78,7 +78,7 @@ const handleAddToCart = async (product) => {
       },
       {
         headers: {
-          Authorization: token, 
+          Authorization: `Bearer ${token}`,
         },
       }
     );
