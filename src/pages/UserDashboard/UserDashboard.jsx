@@ -12,45 +12,24 @@ const UserDashboard = () => {
   const userId = sessionStorage.getItem('userId');
   const token = sessionStorage.getItem('token'); // Assuming you store the token in sessionStorage
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(
-          'https://silver-gray-stem.glitch.me/api/products',
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        );
-        setProducts(response.data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
+ useEffect(() => {
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get(
+        'https://silver-gray-stem.glitch.me/api/products',
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
 
-    const fetchCart = async () => {
-      try {
-        const response = await axios.get(
-          `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        );
-        setCart(response.data);
-        setCartItemsCount(response.data.length);
-      } catch (error) {
-        console.error('Error fetching cart:', error);
-      }
-    };
-
-    fetchProducts();
-    fetchCart();
-  }, [userId, token]);
-
-  const handleAddToCart = async (product) => {
+  const fetchCart = async () => {
     const userId = sessionStorage.getItem('userId');
     if (!userId) {
       console.error('User ID is not defined');
@@ -58,27 +37,73 @@ const UserDashboard = () => {
     }
 
     try {
-      const response = await axios.post(
-        `https://silver-gray-stem.glitch.me/api/cart/${userId}/add-item`,
-        {
-          productId: product.id,
-          quantity: 1, // Default quantity or your quantity logic
-        },
+      const response = await axios.get(
+        `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
         {
           headers: {
             Authorization: token,
           },
         }
       );
-      console.log(response);
-
-      // Update local state
-      setCart((prevCart) => [...prevCart, product]);
-      setCartItemsCount((prevCount) => prevCount + 1);
+      setCart(response.data);
+      setCartItemsCount(response.data.length);
     } catch (error) {
-      console.error('Error adding product to cart:', error);
+      if (error.response && error.response.status === 404) {
+        console.log('Cart not found for the user.');
+        setCart([]);
+        setCartItemsCount(0);
+      } else {
+        console.error('Error fetching cart:', error);
+      }
     }
   };
+
+  fetchProducts();
+  fetchCart();
+}, [token]);
+
+const handleAddToCart = async (product) => {
+  const userId = sessionStorage.getItem('userId');
+  if (!userId) {
+    console.error('User ID is not defined');
+    return;
+  }
+
+  try {
+    const response = await axios.post(
+      `https://silver-gray-stem.glitch.me/api/cart/${userId}/add-item`,
+      {
+        productId: product.id,
+        quantity: 1, // Default quantity or your quantity logic
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    console.log('Item added to cart:', response.data.message);
+
+    // Update local state
+    setCart((prevCart) => {
+      const existingProduct = prevCart.find(
+        (item) => item.id === product.id
+      );
+      if (existingProduct) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
+    setCartItemsCount((prevCount) => prevCount + 1);
+  } catch (error) {
+    console.error('Error adding product to cart:', error);
+  }
+};
 
   const handleCheckout = () => {
     if (cart.length === 0) {
