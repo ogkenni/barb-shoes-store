@@ -30,21 +30,21 @@ const UserDashboard = () => {
   };
 
   const fetchCart = async () => {
-    try {
-      const response = await axios.get(
-        `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      setCart(response.data);
-      setCartItemsCount(response.data.length);
-    } catch (error) {
-      console.error('Error fetching cart:', error);
-    }
-  };
+  try {
+    const response = await axios.get(
+      `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    setCart(response.data);
+    setCartItemsCount(response.data.length);
+  } catch (error) {
+    console.error('Error fetching cart:', error.response ? error.response.data : error.message);
+  }
+};
 
   fetchProducts();
   fetchCart();
