@@ -70,19 +70,21 @@ const handleAddToCart = async (product) => {
   }
 
   try {
-       const response = await axios.post(
-  `https://silver-gray-stem.glitch.me/api/cart/${userId}/add-item`,
-  {
-    productId: product.id,
-    quantity: 1,
-  },
-  {
-    headers: {
-      Authorization: token,
-    },
-  }
-);
-console.log(response);
+    const response = await axios.post(
+      `https://silver-gray-stem.glitch.me/api/cart/${userId}/add-item`,
+      {
+        productId: product.id,
+        quantity: 1,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    console.log(response.data); // Log response data
+
     // Update local state
     setCart((prevCart) => {
       const existingProduct = prevCart.find(
@@ -100,9 +102,10 @@ console.log(response);
     });
     setCartItemsCount((prevCount) => prevCount + 1);
   } catch (error) {
-    console.error('Error adding product to cart:', error);
+    console.error('Error adding product to cart:', error.response ? error.response.data : error.message);
   }
 };
+
 
   const handleCheckout = () => {
     if (cart.length === 0) {
