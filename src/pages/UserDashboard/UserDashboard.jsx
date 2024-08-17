@@ -99,6 +99,7 @@ const UserDashboard = () => {
             {products.map((item) => (
               <li key={item.id}>
                 <img
+                  className={styles.image}
                   style={{
                     height: '200px',
                     width: '200px',
