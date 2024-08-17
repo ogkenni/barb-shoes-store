@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
-import './UserDashboard.module.css';
+import styles from './UserDashboard.module.css';
 import { Link } from 'react-router-dom';
 
 const UserDashboard = () => {
@@ -95,7 +95,7 @@ const UserDashboard = () => {
         <h1 className="pb-5">Hello, welcome!</h1>
         <h2 className="d-flex justify-content-start fs-1">Available Items</h2>
         <div>
-           <ul className="my-5">
+           <ul className={styles.heading}>
             {products.map((item) => (
               <li key={item.id}>
                 <img
@@ -117,7 +117,9 @@ const UserDashboard = () => {
                     height: '50px',
                     color: '#fff',
                     borderRadius: '15px',
+                    marginBottom: "20px"
                   }}
+                  className={styles.button}
                   onClick={() => handleAddToCart(item)}
                 >
                   Add to Cart
