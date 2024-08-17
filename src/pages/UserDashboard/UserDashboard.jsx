@@ -100,11 +100,6 @@ const UserDashboard = () => {
               <li key={item.id}>
                 <img
                   className={styles.image}
-                  style={{
-                    height: '200px',
-                    width: '200px',
-                    marginBottom: '10px',
-                  }}
                   src={item.image_url}
                   alt={item.name}
                 />
