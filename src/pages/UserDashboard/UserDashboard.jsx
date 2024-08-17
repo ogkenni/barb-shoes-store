@@ -43,7 +43,7 @@ const fetchCart = async () => {
       `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
       {
         headers: {
-          Authorization: `Bearer ${token}`, // Add 'Bearer ' prefix if required
+          Authorization: `Bearer token, // Add 'Bearer ' prefix if required
         },
       }
     );
@@ -78,7 +78,7 @@ const handleAddToCart = async (product) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`, // Add 'Bearer ' prefix if required
+          Authorization: `Bearer token, 
         },
       }
     );
