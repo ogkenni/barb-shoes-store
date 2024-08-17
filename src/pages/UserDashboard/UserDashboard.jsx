@@ -15,27 +15,21 @@ const UserDashboard = () => {
  useEffect(() => {
   const fetchProducts = async () => {
     try {
-         const response = await axios.get(
-          'https://silver-gray-stem.glitch.me/api/products',
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        );
-        setProducts(response.data);
+      const response = await axios.get(
+        'https://silver-gray-stem.glitch.me/api/products',
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
   };
 
   const fetchCart = async () => {
-    const userId = sessionStorage.getItem('userId');
-    if (!userId) {
-      console.error('User ID is not defined');
-      return;
-    }
-
     try {
       const response = await axios.get(
         `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
@@ -48,19 +42,14 @@ const UserDashboard = () => {
       setCart(response.data);
       setCartItemsCount(response.data.length);
     } catch (error) {
-      if (error.response && error.response.status === 404) {
-        console.log('Cart not found for the user.');
-        setCart([]);
-        setCartItemsCount(0);
-      } else {
-        console.error('Error fetching cart:', error);
-      }
+      console.error('Error fetching cart:', error);
     }
   };
 
   fetchProducts();
   fetchCart();
-}, [token]);
+}, [userId, token]);
+
 
 const handleAddToCart = async (product) => {
   const userId = sessionStorage.getItem('userId');
@@ -82,8 +71,7 @@ const handleAddToCart = async (product) => {
         },
       }
     );
-
-    console.log(response.data); // Log response data
+    console.log(response);
 
     // Update local state
     setCart((prevCart) => {
@@ -102,9 +90,10 @@ const handleAddToCart = async (product) => {
     });
     setCartItemsCount((prevCount) => prevCount + 1);
   } catch (error) {
-    console.error('Error adding product to cart:', error.response ? error.response.data : error.message);
+    console.error('Error adding product to cart:', error);
   }
 };
+
 
 
   const handleCheckout = () => {
