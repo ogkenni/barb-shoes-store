@@ -14,10 +14,10 @@ const Checkout = () => {
   const userId = queryParams.get('userId');
   const token = localStorage.getItem('token'); // Assuming you store the token in sessionStorage
 
-  useEffect(() => {
+ useEffect(() => {
   const fetchCartItems = async () => {
-    const userId = localStorage.getItem('userId'); // Retrieve userId from sessionStorage
-    const token = localStorage.getItem('token'); // Retrieve token from sessionStorage
+    const userId = localStorage.getItem('userId'); // Retrieve userId from localStorage
+    const token = localStorage.getItem('token'); // Retrieve token from localStorage
 
     if (!userId || !token) {
       console.error('User ID or token is not defined');
@@ -26,14 +26,16 @@ const Checkout = () => {
     }
 
     try {
+      console.log('Fetching cart items for user ID:', userId);
       const response = await axios.get(
         `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Ensure token is prefixed with "Bearer "
+            Authorization: `Bearer ${token}`, // Ensure token is prefixed with "Bearer"
           },
         }
       );
+      console.log('Cart items fetched:', response.data);
       setCartItems(response.data);
     } catch (error) {
       console.error('There was an error fetching the cart items!', error);
@@ -42,7 +44,8 @@ const Checkout = () => {
   };
 
   fetchCartItems();
-}, []);
+}, []); // Empty array means this useEffect runs once on component mount
+
 
 const handleDelete = async (itemId) => {
   const userId = localStorage.getItem('userId'); // Retrieve userId from sessionStorage
