@@ -27,12 +27,12 @@ const Login = () => {
 
       if (response.data.token && response.data.userId) {
         // Save the token and userId in sessionStorage
-        sessionStorage.setItem('token', response.data.token);
-        sessionStorage.setItem('userId', response.data.userId);
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userId', response.data.userId);
 
         // Redirect to the dashboard
         navigate('/dashboard');
-      } else {
+      } else  (!response.data.token && !response.data.userId) {
         // Handle the case where the login was unsuccessful
         navigate('/register');
       }
