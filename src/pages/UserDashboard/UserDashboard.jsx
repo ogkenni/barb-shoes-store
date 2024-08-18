@@ -119,7 +119,7 @@ const handleAddToCart = async (product) => {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userId', response.data.userId);
       
-  window.location.href = "/checkout";
+ window.location.href = `/checkout?userId=${userId}`;
     }
   };
 
@@ -166,7 +166,7 @@ const handleAddToCart = async (product) => {
             <Link
               style={{ textDecoration: 'none', color: 'blueviolet' }}
               onClick={handleCheckout}
-              to="/checkout"
+              to={`/checkout?userId=${userId}`}
             >
               <i className="fa fa-shopping-cart"></i> ({cartItemsCount})
             </Link>
