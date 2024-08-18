@@ -3,13 +3,12 @@ import axios from 'axios';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import styles from './UserDashboard.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const UserDashboard = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartItemsCount, setCartItemsCount] = useState(0);
-   const navigate = useNavigate();
   const userId = sessionStorage.getItem('userId');
   const token = sessionStorage.getItem('token'); // Assuming you store the token in sessionStorage
 
@@ -120,7 +119,7 @@ const handleAddToCart = async (product) => {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('userId', response.data.userId);
       
-    navigate("/checkout");
+  window.location.href = "/checkout";
     }
   };
 
