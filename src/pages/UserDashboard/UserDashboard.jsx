@@ -60,8 +60,8 @@ const fetchCart = async () => {
 
 
 const handleAddToCart = async (product) => {
-  const userId = sessionStorage.getItem('userId');
-  const token = sessionStorage.getItem('token');
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
 
   if (!userId || !token) {
     console.error('User ID or token is not defined');
