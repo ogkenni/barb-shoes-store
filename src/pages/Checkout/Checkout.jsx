@@ -36,7 +36,7 @@ const Checkout = () => {
   };
 
   fetchCartItems();
-}, []);
+}, [userId, token]);
 
  const handleDelete = async (itemId) => {
   const userId = localStorage.getItem('userId');
