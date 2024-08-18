@@ -21,7 +21,7 @@ const Register = () => {
       email,
       password,
     });
-
+console.log(response.data);
     const { token, userId } = response.data;
 
     // Store token and user ID
