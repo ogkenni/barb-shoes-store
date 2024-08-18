@@ -27,7 +27,7 @@ const Checkout = () => {
 
     try {
       console.log('Fetching cart items for user ID:', userId);
-      const response = await axios.post(
+      const response = await axios.get(
         `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
         {
           headers: {
