@@ -24,13 +24,22 @@ const Register = () => {
           password,
         }
       );
-      localStorage.setItem('token', response.data.token);
+
+      const { token, userId } = response.data;
+
+      // Store token and user ID
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', userId);
+
       console.log('User registered:', response.data);
-      navigate('/dashboard');
+
+      // Redirect to dashboard with userId as a query parameter
+      navigate(`/dashboard?userId=${userId}`);
     } catch (error) {
       console.error('Error registering user:', error.response.data);
     }
   };
+
 
   return (
     <>
