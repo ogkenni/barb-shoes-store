@@ -15,30 +15,30 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        'https://silver-gray-stem.glitch.me/register',
-        {
-          email,
-          password,
-        }
-      );
+  e.preventDefault();
+  try {
+    const response = await axios.post(
+      'https://silver-gray-stem.glitch.me/register',
+      {
+        email,
+        password,
+      }
+    );
 
-      const { token, userId } = response.data;
+    const { token, userId } = response.data;
 
-      // Store token and user ID
-      localStorage.setItem('token', token);
-      localStorage.setItem('userId', userId);
+    // Store token and user ID
+    localStorage.setItem('token', token);
+    localStorage.setItem('userId', userId);
 
-      console.log('User registered:', response.data);
+    console.log('User registered:', response.data);
 
-      // Redirect to dashboard with userId as a query parameter
-      navigate(`/dashboard?userId=${userId}`);
-    } catch (error) {
-      console.error('Error registering user:', error.response.data);
-    }
-  };
+    // Redirect to dashboard with userId as a query parameter
+    navigate(`/dashboard?userId=${userId}`);
+  } catch (error) {
+    console.error('Error registering user:', error.response.data);
+  }
+};
 
 
   return (
