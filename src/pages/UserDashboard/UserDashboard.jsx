@@ -40,7 +40,7 @@ const fetchCart = async () => {
 
   try {
     const response = await axios.get(
-      https://silver-gray-stem.glitch.me/api/cart/${userId},
+      `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
       {
         headers: {
           Authorization:  token, // Add 'Bearer ' prefix if required
