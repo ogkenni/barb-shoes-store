@@ -14,39 +14,38 @@ const UserDashboard = () => {
 
  useEffect(() => {
   const fetchProducts = async () => {
-    try {
-      const response = await axios.get(
-        'https://silver-gray-stem.glitch.me/api/products',
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      setProducts(response.data);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    }
-  };
+  const token = localStorage.getItem('token');
+  if (!token) {
+    console.error('Token is not defined');
+    return;
+  }
+
+  try {
+    const response = await axios.get('https://silver-gray-stem.glitch.me/api/products', {
+      headers: {
+        Authorization: `Bearer ${token}`, // Ensure Bearer prefix
+      },
+    });
+    setProducts(response.data);
+  } catch (error) {
+    console.error('Error fetching products:', error.response ? error.response.data : error.message);
+  }
+};
 
 const fetchCart = async () => {
-  const userId = sessionStorage.getItem('userId');
-  const token = sessionStorage.getItem('token'); // Ensure token is available
-
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
   if (!userId || !token) {
     console.error('User ID or token is not defined');
     return;
   }
 
   try {
-    const response = await axios.get(
-      `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
-      {
-        headers: {
-          Authorization:  token, // Add 'Bearer ' prefix if required
-        },
-      }
-    );
+    const response = await axios.get(`https://silver-gray-stem.glitch.me/api/cart/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Ensure Bearer prefix
+      },
+    });
     setCart(response.data);
     setCartItemsCount(response.data.length);
   } catch (error) {
