@@ -32,7 +32,7 @@ const Login = () => {
 
         // Redirect to the dashboard
         navigate('/dashboard');
-      } else  (!response.data.token && !response.data.userId) {
+      } else if (!response.data.token && !response.data.userId) {
         // Handle the case where the login was unsuccessful
         navigate('/register');
       }
