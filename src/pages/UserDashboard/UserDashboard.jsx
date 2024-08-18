@@ -13,21 +13,13 @@ const UserDashboard = () => {
   const token = sessionStorage.getItem('token'); // Assuming you store the token in sessionStorage
 
  useEffect(() => {
-  const token = sessionStorage.getItem('token');
-  const userId = sessionStorage.getItem('userId');
-
-  if (!userId || !token) {
-    console.error('User ID or token is not defined');
-    return;
-  }
-
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
         'https://silver-gray-stem.glitch.me/api/products',
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Ensure 'Bearer' is included
+            Authorization: token,
           },
         }
       );
@@ -37,27 +29,35 @@ const UserDashboard = () => {
     }
   };
 
-  const fetchCart = async () => {
-    try {
-      const response = await axios.get(
-        `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Ensure 'Bearer' is included
-          },
-        }
-      );
-      setCart(response.data);
-      setCartItemsCount(response.data.length);
-    } catch (error) {
-      console.error('Error fetching cart:', error.response ? error.response.data : error.message);
-    }
-  };
+const fetchCart = async () => {
+  const userId = sessionStorage.getItem('userId');
+  const token = sessionStorage.getItem('token'); // Ensure token is available
+
+  if (!userId || !token) {
+    console.error('User ID or token is not defined');
+    return;
+  }
+
+  try {
+    const response = await axios.get(
+      https://silver-gray-stem.glitch.me/api/cart/${userId},
+      {
+        headers: {
+          Authorization:  token, // Add 'Bearer ' prefix if required
+        },
+      }
+    );
+    setCart(response.data);
+    setCartItemsCount(response.data.length);
+  } catch (error) {
+    console.error('Error fetching cart:', error.response ? error.response.data : error.message);
+  }
+};
+
 
   fetchProducts();
   fetchCart();
-}, []);
-
+}, [userId, token]);
 
 
 const handleAddToCart = async (product) => {
