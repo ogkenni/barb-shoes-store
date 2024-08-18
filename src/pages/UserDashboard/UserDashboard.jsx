@@ -112,6 +112,8 @@ const handleAddToCart = async (product) => {
 
 
   const handleCheckout = () => {
+    const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
     if (cart.length === 0) {
       alert('Cart is empty');
       return;
