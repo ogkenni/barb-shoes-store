@@ -127,7 +127,7 @@ const handleAddToCart = async (product) => {
   }
 
   // Redirect to checkout page
- window.location.href = "/checkout";
+ window.location.href = `/checkout?userId=${userId}`;
 };
 
 
@@ -172,7 +172,7 @@ const handleAddToCart = async (product) => {
             style={{ marginTop: '20px', textDecoration: 'none' }}
           >
             <Link
-              to="checkout"
+       to={`/checkout?userId=${userId}`}
               style={{ textDecoration: 'none', color: 'blueviolet' }}
               onClick={handleCheckout}
             >
