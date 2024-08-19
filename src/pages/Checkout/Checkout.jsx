@@ -37,53 +37,7 @@ const Checkout = () => {
     fetchCartItems();
   }, [userId, token]);
 
-  const handleDelete = async (itemId) => {
-    try {
-      console.log('Deleting item with ID:', itemId);
-      const response = await axios.delete(
-        `https://silver-gray-stem.glitch.me/api/cart/remove-item/${itemId}`,
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      console.log('Delete response:', response.data);
-      setCartItems((prevItems) =>
-        prevItems.filter((item) => item.id !== itemId)
-      );
-    } catch (error) {
-      console.error('Error removing item from cart:', error);
-      setError('Failed to remove item. Please try again later.');
-    }
-  };
 
-  const calculateTotal = () => {
-    return cartItems
-      .reduce((total, item) => total + parseFloat(item.price), 0)
-      .toFixed(2);
-  };
-
-  const handlePurchase = async () => {
-    try {
-      const totalAmount = calculateTotal();
-
-      await axios.post(
-        `https://silver-gray-stem.glitch.me/api/checkout/${userId}`,
-        { totalAmount },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      alert('Products purchased successfully!');
-      navigate('/dashboard');
-    } catch (error) {
-      console.error('Error during purchase:', error);
-      setError('Failed to complete purchase. Please try again later.');
-    }
-  };
 
   if (error) {
     return (
@@ -126,14 +80,14 @@ const Checkout = () => {
               <img src={item.image_url} alt={item.name} />
               <p>{item.name}</p>
               <p>N{item.price}</p>
-              <button onClick={() => handleDelete(item.id)}>Remove</button>
+              <button >Remove</button>
             </li>
           ))}
         </ul>
         <h2 className="d-flex justify-content-start fs-1 my-5 pt-5">
-          Total: N{calculateTotal()}
+          Total
         </h2>
-        <button className="my-3" onClick={handlePurchase}>
+        <button className="my-3">
           Purchase
         </button>
       </div>
