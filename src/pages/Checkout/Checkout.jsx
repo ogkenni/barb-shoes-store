@@ -112,7 +112,7 @@ setCartItems((prevItems) =>
         <Header />
         <div className="container my-5 mx-5">
           <h1 className="container my-5 py-5">Your cart is empty!</h1>
-          <button onClick={() => navigate('/dashboard')}>
+          <button onClick={() => {setCartItems([]); navigate('/dashboard');}}>
             Go Back to Shop
           </button>
         </div>
