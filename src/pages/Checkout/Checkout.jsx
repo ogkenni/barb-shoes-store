@@ -11,11 +11,11 @@ const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const userId = localStorage.getItem('userId');
+const { userId } = useParams(); 
   const token = localStorage.getItem('token'); // Assuming you store the token in sessionStorage
 
   useEffect(() => {
-      const userId = localStorage.getItem('userId');
+ const { userId } = useParams(); 
   const token = localStorage.getItem('token');
     const fetchCartItems = async () => {
       try {
