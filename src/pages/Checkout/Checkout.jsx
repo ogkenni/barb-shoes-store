@@ -49,25 +49,27 @@ useEffect(() => {
 
 
   const handleDelete = async (itemId) => {
-    try {
-      console.log('Deleting item with ID:', itemId);
-      const response = await axios.delete(
-        `https://silver-gray-stem.glitch.me/api/cart/remove-item/${itemId}`,
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      console.log('Delete response:', response.data);
-      setCartItems((prevItems) =>
-        prevItems.filter((item) => item.id !== itemId)
-      );
-    } catch (error) {
-      console.error('Error removing item from cart:', error);
-      setError('Failed to remove item. Please try again later.');
-    }
-  };
+  try {
+    const token = localStorage.getItem("token"); // Ensure token is fetched from localStorage
+    console.log('Deleting item with ID:', itemId);
+    const response = await axios.delete(
+      `https://silver-gray-stem.glitch.me/api/cart/remove-item/${itemId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Make sure the token is prefixed with 'Bearer'
+        },
+      }
+    );
+    console.log('Delete response:', response.data);
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.id !== itemId)
+    );
+  } catch (error) {
+    console.error('Error removing item from cart:', error);
+    setError('Failed to remove item. Please try again later.');
+  }
+};
+
 
   const calculateTotal = () => {
     return cartItems
