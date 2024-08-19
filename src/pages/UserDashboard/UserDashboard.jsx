@@ -9,8 +9,8 @@ const UserDashboard = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartItemsCount, setCartItemsCount] = useState(0);
-  const userId = sessionStorage.getItem('userId');
-  const token = sessionStorage.getItem('token'); // Assuming you store the token in sessionStorage
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token'); // Assuming you store the token in sessionStorage
 
  useEffect(() => {
   const fetchProducts = async () => {
