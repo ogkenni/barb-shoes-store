@@ -15,10 +15,15 @@ const Checkout = () => {
   const token = localStorage.getItem('token'); // Assuming you store the token in sessionStorage
 
   useEffect(() => {
-    const userId = queryParams.get('userId');
-    const token = localStorage.getItem('token');
     const fetchCartItems = async () => {
       try {
+          const token = localStorage.getItem("token"); // Retrieve token from localStorage
+  const userId = localStorage.getItem("userId");
+
+  if (!token) {
+    throw new Error("Token is missing");
+  }
+
         const response = await axios.get(
           `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
           {
