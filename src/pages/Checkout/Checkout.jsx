@@ -80,18 +80,20 @@ useEffect(() => {
   const handlePurchase = async () => {
   try {
     const totalAmount = calculateTotal();
+    const token = localStorage.getItem('token');
+
+    console.log('Token:', token); // Debugging log
 
     await axios.post(
       `https://silver-gray-stem.glitch.me/api/checkout/${userId}`,
       { totalAmount },
       {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
 
-    // Clear the cart state
     setCartItems([]);
     alert('Products purchased successfully!');
     navigate('/dashboard');
