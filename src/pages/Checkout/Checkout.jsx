@@ -107,7 +107,6 @@ setCartItems((prevItems) =>
 };
 
   if (cartItems.length === 0) {
-   let cartItems = [];
     setCartItems([]);
     return (
       <>
