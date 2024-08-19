@@ -66,7 +66,7 @@ const handleDelete = async (itemId) => {
 setCartItems((prevItems) => {
   const updatedItems = prevItems.filter((item) => item.id !== itemId);
 
-  if (updatedItems.length === 0 && cartItems === 0) {
+  if (updatedItems.length === 0 && cartItems.length === 0) {
     setCartItems([]);  // Reset local cart state
     navigate('/dashboard');
     return []; // Return empty array to update state
@@ -114,22 +114,6 @@ setCartItems((prevItems) => {
     setError('Failed to complete purchase. Please try again later.');
   }
 };
-
-
-  if (error) {
-    return (
-      <>
-        <Header />
-        <div className="container my-5 mx-5">
-          <h1 className="container my-5 py-5">{error}</h1>
-          <button onClick={() => navigate('/dashboard')}>
-            Go Back to Shop
-          </button>
-        </div>
-        <Footer />
-      </>
-    );
-  }
 
   if (cartItems.length === 0) {
     return (
