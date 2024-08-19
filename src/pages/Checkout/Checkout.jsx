@@ -3,24 +3,24 @@ import Header from '../../components/Header/Header';
 import './Checkout.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const location = useLocation();
+    const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-const { userId } = useParams(); 
+ const userId = queryParams.get('userId');
   const token = localStorage.getItem('token'); // Assuming you store the token in sessionStorage
 
   useEffect(() => {
- const { userId } = useParams(); 
+     const userId = queryParams.get('userId');
   const token = localStorage.getItem('token');
     const fetchCartItems = async () => {
       try {
         const response = await axios.get(
-          `https://silver-gray-stem.glitch.me/api/cart-checkout/${userId}`,
+          `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
           {
             headers: {
               Authorization: token,
