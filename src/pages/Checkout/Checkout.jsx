@@ -66,7 +66,7 @@ const handleDelete = async (itemId) => {
 setCartItems((prevItems) => {
   const updatedItems = prevItems.filter((item) => item.id !== itemId);
 
-  if (updatedItems.length === 0) {
+  if (updatedItems.length === 0 && cartItems === 0) {
     setCartItems([]);  // Reset local cart state
     navigate('/dashboard');
     return []; // Return empty array to update state
