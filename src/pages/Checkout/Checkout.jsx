@@ -48,27 +48,38 @@ useEffect(() => {
 }, []); // Removed userId and token from dependency array since they are fetched within the effect
 
 
-  const handleDelete = async (itemId) => {
+const handleDelete = async (itemId) => {
   try {
-    const token = localStorage.getItem("token"); // Ensure token is fetched from localStorage
+    const token = localStorage.getItem("token");
     console.log('Deleting item with ID:', itemId);
     const response = await axios.delete(
       `https://silver-gray-stem.glitch.me/api/cart/remove-item/${itemId}`,
       {
         headers: {
-          Authorization: `Bearer ${token}`, // Make sure the token is prefixed with 'Bearer'
+          Authorization: `Bearer ${token}`,
         },
       }
     );
     console.log('Delete response:', response.data);
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.id !== itemId)
-    );
+
+    // Update the cart items state
+    setCartItems((prevItems) => {
+      const updatedItems = prevItems.filter((item) => item.id !== itemId);
+      
+      // If cart is empty, redirect to dashboard
+      if (updatedItems.length === 0) {
+        navigate('/dashboard');
+      }
+
+      return updatedItems;
+    });
+
   } catch (error) {
     console.error('Error removing item from cart:', error);
     setError('Failed to remove item. Please try again later.');
   }
 };
+
 
 
   const calculateTotal = () => {
