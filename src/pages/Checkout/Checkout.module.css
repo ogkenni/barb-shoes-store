@@ -1,4 +1,4 @@
-ul {
+.ul {
   display: flex;
   max-width: auto;
   gap: 30px;
@@ -6,12 +6,12 @@ ul {
   list-style: none;
 }
 
-img {
+.img {
   height: 200px;
   width: 200px;
   margin-bottom: 10px;
 }
 
-p {
+.p {
   font-size: 20px;
 }
