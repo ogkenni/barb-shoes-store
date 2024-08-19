@@ -63,16 +63,20 @@ const handleDelete = async (itemId) => {
     console.log('Delete response:', response.data);
 
     // Clear the cart state and redirect if empty
-    setCartItems((prevItems) => {
+     setCartItems((prevItems) => {
       const updatedItems = prevItems.filter((item) => item.id !== itemId);
 
       if (updatedItems.length === 0) {
         // Clear cart state and redirect to dashboard
-        setCartItems([]);  // Reset local cart state
-        navigate('/dashboard');
+       return( setCartItems([]);  // Reset local cart state
+        navigate('/dashboard');)
+      } else {
+        // Update state with remaining items
+        setCartItems(updatedItems);
       }
-    });
 
+      return updatedItems;
+    });
   } catch (error) {
     console.error('Error removing item from cart:', error);
     setError('Failed to remove item. Please try again later.');
