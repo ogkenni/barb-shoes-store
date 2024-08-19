@@ -20,7 +20,7 @@ const Checkout = () => {
     const fetchCartItems = async () => {
       try {
         const response = await axios.get(
-          `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
+          "https://silver-gray-stem.glitch.me/api/checkout",
           {
             headers: {
               Authorization: token,
