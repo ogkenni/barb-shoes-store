@@ -78,25 +78,29 @@ useEffect(() => {
   };
 
   const handlePurchase = async () => {
-    try {
-      const totalAmount = calculateTotal();
+  try {
+    const totalAmount = calculateTotal();
 
-      await axios.post(
-        `https://silver-gray-stem.glitch.me/api/checkout/${userId}`,
-        { totalAmount },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      alert('Products purchased successfully!');
-      navigate('/dashboard');
-    } catch (error) {
-      console.error('Error during purchase:', error);
-      setError('Failed to complete purchase. Please try again later.');
-    }
-  };
+    await axios.post(
+      `https://silver-gray-stem.glitch.me/api/checkout/${userId}`,
+      { totalAmount },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    // Clear the cart state
+    setCartItems([]);
+    alert('Products purchased successfully!');
+    navigate('/dashboard');
+  } catch (error) {
+    console.error('Error during purchase:', error);
+    setError('Failed to complete purchase. Please try again later.');
+  }
+};
+
 
   if (error) {
     return (
