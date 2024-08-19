@@ -70,12 +70,7 @@ const handleDelete = async (itemId) => {
         // Clear cart state and redirect to dashboard
         setCartItems([]);  // Reset local cart state
         navigate('/dashboard');
-      } else {
-        // Update state with remaining items
-        setCartItems(updatedItems);
       }
-
-      return updatedItems;
     });
 
   } catch (error) {
