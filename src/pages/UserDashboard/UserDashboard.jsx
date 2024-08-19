@@ -159,7 +159,7 @@ const handleAddToCart = async (product) => {
                     marginBottom: "20px"
                   }}
                   className={styles.button}
-                  onClick={() => handleAddToCart(product)}
+                  onClick={() => handleAddToCart(item)}
                 >
                   Add to Cart
                 </button>
