@@ -137,14 +137,14 @@ useEffect(() => {
               <img className={styles.img} src={item.image_url} alt={item.name} />
               <p className={styles.p}>{item.name}</p>
               <p className={styles.p}>N{item.price}</p>
-              <button onClick={() => handleDelete(item.id)}>Remove</button>
+              <button className={styles.button} onClick={() => handleDelete(item.id)}>Remove</button>
             </li>
           ))}
         </ul>
         <h2 className="d-flex justify-content-start fs-1 my-5 pt-5">
           Total: N{calculateTotal()}
         </h2>
-        <button className="my-3" onClick={handlePurchase}>
+        <button className={styles.button} onClick={handlePurchase}>
           Purchase
         </button>
       </div>
