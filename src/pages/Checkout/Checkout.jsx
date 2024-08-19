@@ -63,17 +63,17 @@ const handleDelete = async (itemId) => {
     console.log('Delete response:', response.data);
 
     // Clear the cart state and redirect if empty
-     setCartItems((prevItems) => {
-      const updatedItems = prevItems.filter((item) => item.id !== itemId);
+setCartItems((prevItems) => {
+  const updatedItems = prevItems.filter((item) => item.id !== itemId);
 
-      if (updatedItems.length === 0) {
-        // Clear cart state and redirect to dashboard
-       return( setCartItems([]);  // Reset local cart state
-        navigate('/dashboard');)
-      } else {
-        // Update state with remaining items
-        setCartItems(updatedItems);
-      }
+  if (updatedItems.length === 0) {
+    setCartItems([]);  // Reset local cart state
+    navigate('/dashboard');
+    return []; // Return empty array to update state
+  } else {
+    return updatedItems; // Return the updated items
+  }
+});
 
       return updatedItems;
     });
