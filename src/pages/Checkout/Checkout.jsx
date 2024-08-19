@@ -74,9 +74,6 @@ setCartItems((prevItems) => {
     return updatedItems; // Return the updated items
   }
 });
-
-      return updatedItems;
-    });
   } catch (error) {
     console.error('Error removing item from cart:', error);
     setError('Failed to remove item. Please try again later.');
