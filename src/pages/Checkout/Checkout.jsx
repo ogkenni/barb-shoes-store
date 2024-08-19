@@ -1,6 +1,6 @@
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
-import './Checkout.module.css';
+import styles from './Checkout.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -131,12 +131,12 @@ useEffect(() => {
       <Header />
       <div className="container my-5">
         <h1 className="d-flex justify-content-start fs-1 my-5">Checkout</h1>
-        <ul>
+        <ul className={styles.ul}>
           {cartItems.map((item) => (
             <li key={item.id}>
-              <img src={item.image_url} alt={item.name} />
-              <p>{item.name}</p>
-              <p>N{item.price}</p>
+              <img className={styles.img} src={item.image_url} alt={item.name} />
+              <p className={styles.p}>{item.name}</p>
+              <p className={styles.p}>N{item.price}</p>
               <button onClick={() => handleDelete(item.id)}>Remove</button>
             </li>
           ))}
