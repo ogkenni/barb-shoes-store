@@ -111,17 +111,25 @@ const handleAddToCart = async (product) => {
 };
 
 
-  const handleCheckout = () => {
-    if (cart.length === 0) {
-      alert('Cart is empty');
-      return;
-    } else {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('userId', response.data.userId);
-      
- window.location.href = `/checkout/${userId}`;
-    }
-  };
+ const handleCheckout = () => {
+  if (cart.length === 0) {
+    alert('Cart is empty');
+    return;
+  }
+
+  // Retrieve token and userId from localStorage
+  const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('userId');
+
+  if (!token || !userId) {
+    alert('User is not authenticated');
+    return;
+  }
+
+  // Redirect to checkout page
+  window.location.href = `/checkout/${userId}`;
+};
+
 
   return (
     <>
