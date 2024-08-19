@@ -11,10 +11,12 @@ const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const userId = queryParams.get('userId');
-  const token = sessionStorage.getItem('token'); // Assuming you store the token in sessionStorage
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token'); // Assuming you store the token in sessionStorage
 
   useEffect(() => {
+      const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
     const fetchCartItems = async () => {
       try {
         const response = await axios.get(
