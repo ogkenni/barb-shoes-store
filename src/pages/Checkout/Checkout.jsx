@@ -14,33 +14,39 @@ const Checkout = () => {
   const userId = queryParams.get('userId');
   const token = localStorage.getItem('token'); // Assuming you store the token in sessionStorage
 
-  useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-          const token = localStorage.getItem("token"); // Retrieve token from localStorage
-  const userId = localStorage.getItem("userId");
+useEffect(() => {
+  const fetchCartItems = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
 
-  if (!token) {
-    throw new Error("Token is missing");
-  }
-
-        const response = await axios.get(
-          `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        );
-        setCartItems(response.data);
-      } catch (error) {
-        console.error('There was an error fetching the cart items!', error);
-        setError('Failed to load cart items. Please try again later.');
+      if (!token || !userId) {
+        throw new Error("Token or User ID is missing");
       }
-    };
 
-    fetchCartItems();
-  }, [userId, token]);
+      const response = await axios.get(
+        `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Added Bearer prefix
+          },
+        }
+      );
+
+      if (response.data) {
+        setCartItems(response.data);
+      } else {
+        setCartItems([]); // If response is empty, set cart items to an empty array
+      }
+    } catch (error) {
+      console.error('There was an error fetching the cart items!', error);
+      setError('Failed to load cart items. Please try again later.');
+    }
+  };
+
+  fetchCartItems();
+}, []); // Removed userId and token from dependency array since they are fetched within the effect
+
 
   const handleDelete = async (itemId) => {
     try {
