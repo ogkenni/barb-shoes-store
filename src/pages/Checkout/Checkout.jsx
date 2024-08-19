@@ -107,7 +107,6 @@ setCartItems((prevItems) =>
 };
 
   if (cartItems.length === 0) {
-    setCartItems([]);
     return (
       <>
         <Header />
