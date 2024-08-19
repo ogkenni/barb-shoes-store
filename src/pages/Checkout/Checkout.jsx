@@ -67,9 +67,10 @@ setCartItems((prevItems) => {
   const updatedItems = prevItems.filter((item) => item.id !== itemId);
 if (updatedItems.length > 0){
   return updatedItems;
-} else {
+} else 
   return [];  // Reset local cart state
-  }}
+  
+}
   } catch (error) {
     console.error('Error removing item from cart:', error);
     setError('Failed to remove item. Please try again later.');
