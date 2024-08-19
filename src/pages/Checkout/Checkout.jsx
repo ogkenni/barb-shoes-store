@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header';
 import './Checkout.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -20,7 +20,7 @@ const { userId } = useParams();
     const fetchCartItems = async () => {
       try {
         const response = await axios.get(
-          `https://silver-gray-stem.glitch.me/api/checkout/${userId}`,
+          `https://silver-gray-stem.glitch.me/api/cart-checkout/${userId}`,
           {
             headers: {
               Authorization: token,
