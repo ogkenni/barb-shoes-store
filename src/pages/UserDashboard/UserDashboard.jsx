@@ -173,7 +173,7 @@ const handleAddToCart = async (product) => {
           >
             <Link
               style={{ textDecoration: 'none', color: 'blueviolet' }}
-              onClick={handleCheckout()}
+              onClick={()=>handleCheckout()}
             >
               <i className="fa fa-shopping-cart"></i> ({cartItemsCount})
             </Link>
