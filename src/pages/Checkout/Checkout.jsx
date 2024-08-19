@@ -9,45 +9,34 @@ const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const userId = queryParams.get('userId');
+  const token = localStorage.getItem('token'); // Assuming you store the token in sessionStorage
 
- useEffect(() => {
-  const fetchCartItems = async () => {
-    const userId = localStorage.getItem('userId');
-    const token = localStorage.getItem('token');
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const response = await axios.get(
+          `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+        setCartItems(response.data);
+      } catch (error) {
+        console.error('There was an error fetching the cart items!', error);
+        setError('Failed to load cart items. Please try again later.');
+      }
+    };
 
-    if (!userId || !token) {
-      setError('User ID or token is missing.');
-      return;
-    }
+    fetchCartItems();
+  }, [userId, token]);
 
+  const handleDelete = async (itemId) => {
     try {
-      const response = await axios.get(
-        `https://silver-gray-stem.glitch.me/api/cart/${userId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setCartItems(response.data);
-    } catch (error) {
-      setError('Failed to load cart items. Please try again later.');
-    }
-  };
-
-  fetchCartItems();
-}, [userId, token]);
-
- const handleDelete = async (itemId) => {
-  const userId = localStorage.getItem('userId');
-  const token = localStorage.getItem('token');
-
-  if (!userId || !token) {
-    setError('User ID or token is missing.');
-    return;
-  }
-
-   try {
       console.log('Deleting item with ID:', itemId);
       const response = await axios.delete(
         `https://silver-gray-stem.glitch.me/api/cart/remove-item/${itemId}`,
@@ -65,7 +54,7 @@ const Checkout = () => {
       console.error('Error removing item from cart:', error);
       setError('Failed to remove item. Please try again later.');
     }
-};
+  };
 
   const calculateTotal = () => {
     return cartItems
@@ -73,35 +62,26 @@ const Checkout = () => {
       .toFixed(2);
   };
 
- const handlePurchase = async () => {
-  const userId = localStorage.getItem('userId');
-  const token = localStorage.getItem('token');
+  const handlePurchase = async () => {
+    try {
+      const totalAmount = calculateTotal();
 
-  if (!userId || !token) {
-    setError('User ID or token is missing.');
-    return;
-  }
-
-  try {
-    const totalAmount = calculateTotal();
-
-    await axios.post(
-      `https://silver-gray-stem.glitch.me/api/checkout/${userId}`,
-      { totalAmount },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    alert('Products purchased successfully!');
-    navigate('/dashboard');
-  } catch (error) {
-    setError('Failed to complete purchase. Please try again later.');
-  }
-};
-
+      await axios.post(
+        `https://silver-gray-stem.glitch.me/api/checkout/${userId}`,
+        { totalAmount },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      alert('Products purchased successfully!');
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Error during purchase:', error);
+      setError('Failed to complete purchase. Please try again later.');
+    }
+  };
 
   if (error) {
     return (
