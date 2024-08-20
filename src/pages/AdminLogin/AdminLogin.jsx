@@ -32,10 +32,10 @@ const AdminLogin = () => {
   return (
     <>
       <Header />
-      <div className="container my-5 py-5 mx-2">
+      <div  className={styles.form}>
         <h2>Admin Login</h2>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <form className={styles.form} onSubmit={handleLogin}>
+        <form onSubmit={handleLogin}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
