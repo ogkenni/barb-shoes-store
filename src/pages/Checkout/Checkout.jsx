@@ -63,15 +63,7 @@ const handleDelete = async (itemId) => {
     console.log('Delete response:', response.data);
 
     setCartItems((prevItems) => {
-      const updatedItems = prevItems.filter((item) => item.id !== itemId);
-
-      // If the updated cart is empty, reset the cart and navigate to the dashboard
-      if (updatedItems.length === 0) {
-        navigate('/dashboard'); // Redirect to dashboard
-        return []; // Reset cart to an empty array
-      }
-
-      return updatedItems;
+      prevItems.filter((item) => item.id !== itemId);
     });
 
   } catch (error) {
@@ -117,12 +109,13 @@ const handleDelete = async (itemId) => {
 };
 
   if (cartItems.length === 0) {
+    const empty = setCartItems([]);
     return (
       <>
         <Header />
         <div className="container my-5 mx-5">
           <h1 className="container my-5 py-5">Your cart is empty!</h1>
-          <button className={styles.button} onClick={() => navigate('/dashboard')}>
+          <button className={styles.button} onClick={() => {navigate('/dashboard'); empty ;}}>
             Go Back to Shop
           </button>
         </div>
