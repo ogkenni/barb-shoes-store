@@ -25,6 +25,7 @@ h2 {
 
 .ul {
   display: flex;
+  flex-wrap: wrap;
   max-width: auto;
   gap: 30px;
   height: auto;
