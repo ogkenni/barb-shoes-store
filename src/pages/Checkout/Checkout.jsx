@@ -109,13 +109,12 @@ const handleDelete = async (itemId) => {
 };
 
   if (cartItems.length === 0) {
-    const empty = setCartItems([]);
     return (
       <>
         <Header />
         <div className="container my-5 mx-5">
           <h1 className="container my-5 py-5">Your cart is empty!</h1>
-          <button className={styles.button} onClick={() => {navigate('/dashboard'); empty ;}}>
+          <button className={styles.button} onClick={() => navigate('/dashboard')}>
             Go Back to Shop
           </button>
         </div>
