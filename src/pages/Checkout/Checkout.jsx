@@ -62,23 +62,24 @@ const handleDelete = async (itemId) => {
     );
     console.log('Delete response:', response.data);
 
-setCartItems((prevItems) => {
-  const updatedItems = prevItems.filter((item) => item.id !== itemId);
-  
-  // If the updated cart is empty, reset the cart
-  if (updatedItems.length === 0) {
-    return []; // Return an empty array to reset the cart
-  }
+    setCartItems((prevItems) => {
+      const updatedItems = prevItems.filter((item) => item.id !== itemId);
 
-  // Otherwise, return the updated items
-  return updatedItems;
-});
+      // If the updated cart is empty, reset the cart and navigate to the dashboard
+      if (updatedItems.length === 0) {
+        navigate('/dashboard'); // Redirect to dashboard
+        return []; // Reset cart to an empty array
+      }
+
+      return updatedItems;
+    });
 
   } catch (error) {
     console.error('Error removing item from cart:', error);
     setError('Failed to remove item. Please try again later.');
   }
 };
+
 
 
 
@@ -121,7 +122,7 @@ setCartItems((prevItems) => {
         <Header />
         <div className="container my-5 mx-5">
           <h1 className="container my-5 py-5">Your cart is empty!</h1>
-          <button onClick={() => navigate('/dashboard')}>
+          <button className={styles.button} onClick={() => navigate('/dashboard')}>
             Go Back to Shop
           </button>
         </div>
