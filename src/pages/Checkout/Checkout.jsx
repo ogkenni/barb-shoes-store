@@ -78,7 +78,7 @@ const handleDelete = async (itemId) => {
         <Footer />
       </>
     );
-  }
+  };
     }
     
   } catch (error) {
