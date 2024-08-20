@@ -62,7 +62,7 @@ const handleDelete = async (itemId) => {
     );
     console.log('Delete response:', response.data);
 
-    setCartItems((prevItems) => 
+    setCartItems((prevItems) => {
       prevItems.filter((item) => item.id !== itemId));
 
   if (prevItems.length === 0) {
@@ -79,7 +79,7 @@ const handleDelete = async (itemId) => {
       </>
     );
   }
-
+    }
     
   } catch (error) {
     console.error('Error removing item from cart:', error);
