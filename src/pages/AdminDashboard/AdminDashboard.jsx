@@ -1,4 +1,4 @@
-import './AdminDashboard.module.css';
+import styles from './AdminDashboard.module.css';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -66,7 +66,7 @@ const AdminDashboard = () => {
       <div className="container mx-3 my-5 py-5">
         <h1 className="mb-5">Admin Dashboard</h1>
 
-        <form onSubmit={handleAddProduct}>
+        <form className={styles.form} onSubmit={handleAddProduct}>
           <h2 className="mt-3">Add New Product</h2>
           <input
             type="text"
