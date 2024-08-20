@@ -96,10 +96,10 @@ const AdminDashboard = () => {
         </form>
 
         <h2 className="my-5 py-5">Uploaded Products</h2>
-        <ul>
+        <ul className={styles.ul}>
           {products.map((product) => (
             <li key={product.id}>
-              <img src={product.image_url} />
+              <img className={styles.img} src={product.image_url} />
               <h3>{product.name}</h3>
               <p>Price: N{product.price}</p>
 
