@@ -63,7 +63,21 @@ const handleDelete = async (itemId) => {
     console.log('Delete response:', response.data);
 
     setCartItems((prevItems) => {
- return prevItems.filter((item) => item.id !== itemId));
+  prevItems.filter((item) => item.id !== itemId);
+  if (cartItems.length === 0) {
+    return (
+      <>
+        <Header />
+        <div className="container my-5 mx-5">
+          <h1 className="container my-5 py-5">Your cart is empty!</h1>
+          <button className={styles.button} onClick={() => navigate('/dashboard')}>
+            Go Back to Shop
+          </button>
+        </div>
+        <Footer />
+      </>
+    );
+  }      
     }
     
   } catch (error) {
@@ -109,20 +123,7 @@ const handleDelete = async (itemId) => {
 };
 
 
-  if (cartItems.length === 0) {
-    return (
-      <>
-        <Header />
-        <div className="container my-5 mx-5">
-          <h1 className="container my-5 py-5">Your cart is empty!</h1>
-          <button className={styles.button} onClick={() => navigate('/dashboard')}>
-            Go Back to Shop
-          </button>
-        </div>
-        <Footer />
-      </>
-    );
-  }
+
 
   return (
     <>
