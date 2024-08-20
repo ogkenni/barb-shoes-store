@@ -110,20 +110,20 @@ const handleDelete = async (itemId) => {
 };
 
   // Function to clear the cart
-  const clearCart = async () => {
-    try {
-      await axios.post('https://silver-gray-stem.glitch.me/api/cart/clear-cart', {}, {
-        headers: { Authorization: `Bearer ${token}` } // Include JWT token in header
-      });
-      setCartItems([]); // Reset local state
-      console.log('Cart cleared successfully.');
-      // Optionally, redirect to dashboard or show a success message
-      window.location.href = '/dashboard';
-    } catch (error) {
-      console.error('Error clearing cart:', error);
-      // Optionally, show an error message to the user
-    }
-  };
+ const clearCart = async () => {
+  try {
+    const response = await axios.post('https://silver-gray-stem.glitch.me/api/cart/clear-cart', {}, {
+      headers: { Authorization: `Bearer ${token}` } // Include JWT token in header
+    });
+    console.log('Cart cleared successfully:', response.data.message);
+    setCartItems([]); // Reset local state
+    window.location.href = '/dashboard'; // Redirect to dashboard
+  } catch (error) {
+    console.error('Error clearing cart:', error.response ? error.response.data : error.message);
+    // Optionally, show an error message to the user
+  }
+};
+
   
 if (cartItems.length === 0) {
     return (
