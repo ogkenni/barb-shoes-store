@@ -92,7 +92,7 @@ const AdminDashboard = () => {
             placeholder="Product Image URL"
             required
           />
-          <button type="submit">Add Product</button>
+          <button className={styles.button} type="submit">Add Product</button>
         </form>
 
         <h2 className="my-5 py-5">Uploaded Products</h2>
