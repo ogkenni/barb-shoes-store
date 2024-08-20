@@ -109,13 +109,29 @@ const handleDelete = async (itemId) => {
   }
 };
 
+  // Function to clear the cart
+  const clearCart = async () => {
+    try {
+      await axios.post('https://silver-gray-stem.glitch.me/api/cart/clear-cart', {}, {
+        headers: { Authorization: `Bearer ${token}` } // Include JWT token in header
+      });
+      setCartItems([]); // Reset local state
+      console.log('Cart cleared successfully.');
+      // Optionally, redirect to dashboard or show a success message
+      window.location.href = '/dashboard';
+    } catch (error) {
+      console.error('Error clearing cart:', error);
+      // Optionally, show an error message to the user
+    }
+  };
+  
 if (cartItems.length === 0) {
     return (
       <>
         <Header />
         <div className="container my-5 mx-5">
           <h1 className="container my-5 py-5">Your cart is empty!</h1>
-          <button className={styles.button} onClick={() => navigate('/dashboard')}>
+          <button className={styles.button} onClick={clearCart}>
             Go Back to Shop
           </button>
         </div>
