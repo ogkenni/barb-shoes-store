@@ -1,4 +1,4 @@
-form {
+.form {
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -8,7 +8,7 @@ form {
   margin: 0 auto;
 }
 
-form input {
+.form input {
   width: 600px;
   height: 50px;
 }
@@ -23,7 +23,7 @@ h2 {
   align-items: center;
 }
 
-ul {
+.ul {
   display: flex;
   max-width: auto;
   gap: 30px;
@@ -31,7 +31,7 @@ ul {
   list-style: none;
 }
 
-img {
+.img {
   height: 200px;
   width: 200px;
   margin-bottom: 10px;
@@ -43,17 +43,17 @@ p {
 }
 
 @media (max-width: 576px) {
-  form input {
+  .form input {
     width: 300px;
     height: 30px;
   }
-  ul {
+  .ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: auto;
     max-width: 412px;
   }
-  img {
+  .img {
     height: 150px;
     width: 150px;
     margin-bottom: 10px;
