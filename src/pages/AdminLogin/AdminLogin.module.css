@@ -1,0 +1,18 @@
+
+.form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+
+
+.button{
+    background-color: blueviolet;
+  border: none;
+  width: 100px;
+  height: 50px;
+  color: #fff;
+  border-radius: 15px;
+  margin: 20px 0;
+}
