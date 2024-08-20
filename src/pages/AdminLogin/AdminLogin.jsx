@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import styles from "./AdminLogin.module.css"
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -34,7 +35,7 @@ const AdminLogin = () => {
       <div className="container my-5 py-5 mx-2">
         <h2>Admin Login</h2>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <form onSubmit={handleLogin}>
+        <form className={styles.form} onSubmit={handleLogin}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -55,7 +56,7 @@ const AdminLogin = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button className="my-3" type="submit">
+          <button className={styles.button} type="submit">
             Login
           </button>
         </form>
