@@ -78,7 +78,7 @@ const handleDelete = async (itemId) => {
       </>
     );
   }      
-    }
+    };
     
   } catch (error) {
     console.error('Error removing item from cart:', error);
