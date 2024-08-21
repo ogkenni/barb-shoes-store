@@ -13,6 +13,26 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     window.location.href = 'https://silver-gray-stem.glitch.me/auth/google';
   };
+const handleGoogleCallback = async () => {
+  try {
+    const response = await fetch('https://silver-gray-stem.glitch.me/auth/google/callback');
+    const data = await response.json();
+
+    if (data.token && data.userId) {
+      // Save token and userId in localStorage
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('userId', data.userId);
+
+      // Redirect to the dashboard
+      window.location.href = '/dashboard';
+    }
+  } catch (error) {
+    console.error('Error handling Google sign-in callback:', error);
+  }
+};
+useEffect(() => {
+  handleGoogleCallback();
+}, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,23 +61,7 @@ const Login = () => {
     }
   };
 
-  // Effect to handle token and user ID from Google Sign-In
-  useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const token = queryParams.get('token');
-    const userId = queryParams.get('userId');
-
-    if (token && userId) {
-      // Save the token and userId in localStorage
-      localStorage.setItem('token', token);
-      localStorage.setItem('userId', userId);
-
-      // Redirect to the dashboard
-      navigate('/dashboard');
-    }
-  }, [navigate]);
-
-
+  
   
   return (
     <>
