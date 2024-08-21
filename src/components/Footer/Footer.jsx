@@ -76,6 +76,7 @@ const Footer = () => {
 
         <div className="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
           <p>© 2024 Company, Inc. All rights reserved.</p>
+          <p>Web app developed by Ogkenni, CEO of WebOnChain Services.</p>
           <ul className="list-unstyled d-flex">
             <li className="ms-3">
               <a className="link-body-emphasis" href="#">
