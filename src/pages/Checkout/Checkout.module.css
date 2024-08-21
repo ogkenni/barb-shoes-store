@@ -23,3 +23,12 @@
   color: #fff;
   border-radius: 15px;
 }
+
+@media (max-width: 576px) {
+  .ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+    max-width: 412px;
+  }
+  }
