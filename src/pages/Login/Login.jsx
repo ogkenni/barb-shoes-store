@@ -41,6 +41,24 @@ const Login = () => {
     }
   };
 
+  // Effect to handle token and user ID from Google Sign-In
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const token = queryParams.get('token');
+    const userId = queryParams.get('userId');
+
+    if (token && userId) {
+      // Save the token and userId in localStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', userId);
+
+      // Redirect to the dashboard
+      navigate('/dashboard');
+    }
+  }, [navigate]);
+
+
+  
   return (
     <>
       <Header />
