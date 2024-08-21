@@ -31,4 +31,10 @@
     height: auto;
     max-width: 412px;
   }
+  
+.img {
+  height: 150px;
+  width: 150px;
+  margin-bottom: 10px;
+}
   }
