@@ -56,7 +56,7 @@ const fetchCart = async () => {
 
   fetchProducts();
   fetchCart();
-}, [userId, token]);
+}, []);
 
 
 const handleAddToCart = async (product) => {
