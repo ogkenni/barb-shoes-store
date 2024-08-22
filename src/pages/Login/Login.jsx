@@ -15,7 +15,7 @@ const Login = () => {
   };
 const handleGoogleCallback = async () => {
   try {
-    const response = await fetch('https://silver-gray-stem.glitch.me/auth/google/callback');
+    const response = await fetch('https://silver-gray-stem.glitch.me/auth/google/dashboard');
     const data = await response.json();
 
     if (data.token && data.userId) {
