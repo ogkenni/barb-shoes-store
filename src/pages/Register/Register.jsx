@@ -13,6 +13,26 @@ const Register = () => {
   const handleGoogleSignIn = () => {
     window.location.href = 'https://silver-gray-stem.glitch.me/auth/google';
   };
+const handleGoogleCallback = async () => {
+  try {
+    const response = await fetch('https://silver-gray-stem.glitch.me/auth/google/dashboard');
+    const data = await response.json();
+
+    if (data.token && data.userId) {
+      // Save token and userId in localStorage
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('userId', data.userId);
+
+      // Redirect to the dashboard
+      window.location.href = '/dashboard';
+    }
+  } catch (error) {
+    console.error('Error handling Google sign-in callback:', error);
+  }
+};
+useEffect(() => {
+  handleGoogleCallback();
+}, []);
 
   const handleSubmit = async (e) => {
   e.preventDefault();
